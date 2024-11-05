@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Inicie o temporizador ao carregar a página
-    // startTimer();
+    startTimer();
 
     function lockContent() {
         // Bloqueia a visualização do conteúdo
