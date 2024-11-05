@@ -18,12 +18,7 @@ function loadBooks() {
         coverImage.alt = `${book.title} cover`;
         coverImage.classList.add('book-cover');
 
-        const bookTitle = document.createElement('p');
-        bookTitle.textContent = book.title;
-        bookTitle.classList.add('book-title');
-
         bookItem.appendChild(coverImage);
-        bookItem.appendChild(bookTitle);
 
         // Adiciona um evento de clique que redireciona para a página de leitura
         bookItem.addEventListener('click', () => {

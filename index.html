@@ -5,17 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Biblioteca do Kindle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Page Flow</title>
 </head>
 <body>
     <header>
-        <h1>Biblioteca do Kindle</h1>
+        <!-- Ícone de menu hamburguer -->
+        <span class="menu-icon"><i class="fas fa-bars"></i></span>
+        <!-- Ícone de busca -->
+        <span class="search-icon"><i class="fas fa-search"></i></span>
     </header>
     <main>
+        <h1>Baseado em seus interesses</h1>
         <section class="book-list" id="book-list">
             <!-- Livros serão adicionados dinamicamente aqui -->
         </section>
+        
+        <!-- Seção "Sua Biblioteca" com ícone de link -->
+        <h1>Sua Biblioteca <span class="link-icon">&#128279;</span></h1>
+        
+        <!-- Seção "Cursos de Leitura" com ícone de link -->
+        <h1>Cursos de Leitura <span class="link-icon">&#128279;</span></h1>
+
+        <!-- Card de "Continue de Onde Parou" -->
+        <section class="continue-reading">
+            <h2>Continue de Onde Parou <span class="link-icon">&#128279;</span></h2>
+            <p class="book-excerpt">
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi..."
+            </p>
+        </section>
     </main>
+    
+    <footer>
+        <span class="footer-option"><i class="fas fa-book"></i> Biblioteca</span>
+        <span class="footer-option"><i class="fas fa-store"></i> Loja</span>
+    </footer>
     <script src="scripts/script.js"></script>
 </body>
 </html>
