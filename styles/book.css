@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f5f1;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0 10px; /* Espaçamento horizontal */
+    flex: 0 0 auto; /* Impede o botão de ajustar a largura */
+}
+
+.progress-bar-container {
+    flex-grow: 1; /* Faz a barra de progresso ocupar o máximo de espaço disponível */
+    background-color: #a0a4a5;
+    border-radius: 8px;
+    height: 8px; /* Altura da barra de progresso */
+    margin: 0 10px; /* Margem lateral */
+    position: relative;
+}
+
+.blocked {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #2ad6c8;
+    width: 0; /* Inicialmente 0% de progresso */
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+main {
+    flex-grow: 1; /* Expande para ocupar o espaço restante */
+    padding: 1rem; /* Remover o padding lateral */
+    overflow-y: auto; /* Permite rolagem no conteúdo principal */
+}
+
+.book-content {
+    max-width: 100%;
+    text-align: justify;
+    margin-top: 10px; /* Distância do cabeçalho */
+}
+
+#book-content-section p{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 1.5rem; /* Aumenta o tamanho do capítulo */
+}
+
+p {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+section {
+    margin-bottom: 1.5rem;
+}
+
+.highlight {
+    background-color: #D4E3FA;
+}
+
+
+/* Ajuste para mobile */
+@media (max-width: 600px) {
+    .control-btn {
+        font-size: 1.2rem; /* Reduz o tamanho dos botões no mobile */
+    }
+
+    h2 {
+        font-size: 1.2rem; /* Ajusta o tamanho dos capítulos no mobile */
+    }
+}

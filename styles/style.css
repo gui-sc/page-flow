@@ -190,7 +190,6 @@ footer {
     line-height: 1.5;
 }
 
-
 /* Ajuste para mobile */
 @media (max-width: 600px) {
     .menu-icon, .search-icon, .footer-option {

@@ -8,6 +8,11 @@ const books = [
 
 function loadBooks() {
     const bookList = document.getElementById('book-list');
+    const continueReading = document.getElementById('continue');
+
+    continueReading.addEventListener('click', () => {
+        window.location.href = `book.html?title=${encodeURIComponent(books[0].title)}&paragraph=3`;
+    });
 
     books.forEach((book, index) => {
         const bookItem = document.createElement('div');
