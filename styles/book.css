@@ -111,6 +111,55 @@ section {
 .highlight {
     background-color: #D4E3FA;
 }
+.modal {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.time-option, #continue-reading, #go-back {
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.modal button {
+    background-color: #add8e6; /* Azul claro */
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 10px;
+}
+
+.modal button:hover {
+    background-color: #87ceeb; /* Azul um pouco mais escuro ao passar o mouse */
+}
+
+.modal button:focus {
+    outline: none;
+}
 
 
 /* Ajuste para mobile */

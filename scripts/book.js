@@ -3,10 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const bookTitle = urlParams.get('title');
     const paragraph = urlParams.get('paragraph');
 
-    // Configurações do temporizador
-    const totalTime = 1 * 5 * 1000; // 25 minutos em milissegundos
-    const pauseTime = 1 * 5 * 1000;  // 5 minutos de pausa em milissegundos
 
+    let readingTime; // Tempo de leitura escolhido
+    // const pomodoroCycle = 25 * 60 * 1000; // Tempo de 1 ciclo Pomodoro (25 minutos em ms)
+    // const pauseTime = 5 * 60 * 1000; // Tempo de pausa (5 minutos em ms)
+
+    const pomodoroCycle = 1 * 5 * 1000; // Tempo de 1 ciclo Pomodoro (25 minutos em ms)
+    const pauseTime = 1 * 5 * 1000; // Tempo de pausa (5 minutos em ms)
     let elapsed = 0; // Tempo total passado
     let isPaused = false; // Controle de pausa
     let interval; // Variável do intervalo
@@ -17,47 +20,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const bookContent = document.getElementById('book-content');
     const backButton = document.getElementById('back-btn');
     const scrollDownButton = document.getElementById('scroll-down-btn');
+    const modalTimeSelection = document.getElementById('modal-time-selection');
+    const modalEndReading = document.getElementById('modal-end-reading');
+    const timeOptions = document.querySelectorAll('.time-option');
+    const continueReadingBtn = document.getElementById('continue-reading');
+    const goBackBtn = document.getElementById('go-back');
     let bookContentSection = document.getElementById('book-content-section').querySelectorAll('p');
     let actualParagraph = paragraph ? Number(paragraph) : 0;
     bookContentSection[actualParagraph].classList.add('highlight');
     bookContentSection[actualParagraph].scrollIntoView({ behavior: 'smooth', block: 'center' });
     // Função para iniciar o temporizador
-    function startTimer() {
-        interval = setInterval(() => {
-            if (!isPaused) {
-                elapsed += 1000; // Incrementa o tempo passado em 1 segundo
-
-                // Calcula o progresso e atualiza a largura da barra
-                const progress = Math.min((elapsed / totalTime) * 100, 100);
-                progressBar.style.width = `${progress}%`;
-
-                if (elapsed >= totalTime) {
-                    clearInterval(interval);
-                    progressBar.style.width = `${0}%`;
-                    lockContent();
-                }
-            }
-        }, 1000);
-    }
-
-    // Função para pausar o temporizador
-    function pauseTimer() {
-        isPaused = true;
-        playPauseBtn.textContent = '▶️'; // Ícone de play
-    }
-
-    // Função para retomar o temporizador
-    function resumeTimer() {
-        isPaused = false;
-        playPauseBtn.textContent = '⏸️'; // Ícone de pause
-    }
-
-    // Inicie o temporizador ao carregar a página
-    startTimer();
 
     function lockContent() {
         // Bloqueia a visualização do conteúdo
-        
+
         header.style.display = 'none';
         bookContent.innerHTML = `
             <div class="blocked">
@@ -118,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         bookContentSection = document.getElementById('book-content-section').querySelectorAll('p');
         bookContentSection[actualParagraph].classList.add('highlight');
-        startTimer();
+        startReadingCycle(completedCycles)
     }
     backButton.addEventListener('click', () => {
         window.location.href = 'index.html';
@@ -133,4 +109,76 @@ document.addEventListener('DOMContentLoaded', () => {
         bookContentSection[actualParagraph].classList.add('highlight');
         bookContentSection[actualParagraph].scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
+
+
+    // Função para abrir o modal de seleção de tempo
+    function openModalSelection() {
+        modalTimeSelection.style.display = 'flex';
+    }
+
+    // Função para fechar o modal de seleção de tempo
+    function closeModalSelection() {
+        modalTimeSelection.style.display = 'none';
+    }
+
+    // Ação para cada opção de tempo
+    timeOptions.forEach(button => {
+        button.addEventListener('click', () => {
+            readingTime = Number(button.getAttribute('data-time')) / 5 * 1 * 1000; // Converte para ms
+            const cycles = Math.ceil(readingTime / pomodoroCycle); // Calcula o número de ciclos necessários
+            closeModalSelection();
+            startReadingCycle(cycles); // Inicia o ciclo de leitura
+        });
+    });
+
+    let completedCycles = 0;;
+    // Função para iniciar o ciclo de leitura
+    function startReadingCycle(cycles) {
+        function startTimer() {
+            interval = setInterval(() => {
+                console.log('interval', isPaused);
+                if (!isPaused) {
+                    elapsed += 1000; // Incrementa o tempo passado em 1 segundo
+                    const progress = Math.min((elapsed / pomodoroCycle) * 100, 100);
+                    progressBar.style.width = `${progress}%`;
+
+                    if (elapsed >= pomodoroCycle) {
+                        completedCycles++;
+                        clearInterval(interval);
+                        progressBar.style.width = '0%';
+                        elapsed = 0;
+                        if (completedCycles < cycles) {
+                            lockContent();
+                        } else {
+                            openModalEndReading();
+                        }
+                    } else if (elapsed >= readingTime) {
+                        clearInterval(interval);
+                        progressBar.style.width = '0%';
+                        elapsed = 0;
+                        openModalEndReading();
+                    }
+                }
+            }, 1000);
+        }
+        startTimer();
+    }
+
+    // Função para abrir o modal de fim de leitura
+    function openModalEndReading() {
+        modalEndReading.style.display = 'flex';
+    }
+
+    // Ação dos botões no modal de fim de leitura
+    continueReadingBtn.addEventListener('click', () => {
+        modalEndReading.style.display = 'none';
+        openModalSelection(); // Abre o modal para escolher novo tempo de leitura
+    });
+
+    goBackBtn.addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
+
+    // Abre o modal de seleção de tempo ao carregar a página
+    openModalSelection();
 });
