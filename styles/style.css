@@ -192,6 +192,21 @@ footer {
     line-height: 1.5;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre busca e perfil */
+}
+
+/* Estilo da foto de perfil */
+.profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; /* Torna a imagem redonda */
+    object-fit: cover;
+    cursor: pointer;
+}
+
 /* Ajuste para mobile */
 @media (max-width: 600px) {
     .menu-icon, .search-icon, .footer-option {
